@@ -25,3 +25,4 @@ chat_backup_before_login/
 *.log
 .pytest_cache/
 .vscode/
+main.py
