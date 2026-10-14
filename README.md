@@ -202,3 +202,6 @@ https://localhost:8443/
 iPhoneから利用する場合は、CaddyfileにPCのLAN内IPv4アドレスを追加し、iPhone側でも証明書の信頼設定を行います。
 
 この設定例はローカル開発用であり、インターネットへの公開運用を想定していません。
+## 動作画面
+
+![Local AI Chatの動作画面](docs/images/local-ai-chat-demo.png)
