@@ -1,0 +1,27 @@
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Django database
+*.sqlite3
+
+# Secrets and local settings
+.env
+.env.*
+config/settings.py
+Caddyfile
+*.key
+*.pem
+
+# Backups
+chat_backup_before_login/
+*.bak
+*backup*/
+
+# Logs and temporary files
+*.log
+.pytest_cache/
+.vscode/

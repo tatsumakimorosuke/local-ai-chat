@@ -1,0 +1,324 @@
+/* 全体 */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #121212;
+    color: #eeeeee;
+    font-family: sans-serif;
+}
+
+.container {
+    max-width: 850px;
+    height: 100vh;
+    height: 100dvh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ヘッダー */
+header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px 16px;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #333;
+}
+
+header h1 {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    font-size: 22px;
+}
+
+header p {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+    color: #aaaaaa;
+    font-size: 13px;
+}
+
+header form {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    justify-self: end;
+    align-self: start;
+}
+
+/* 共通ボタン */
+button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    background: #36977b;
+    color: white;
+    cursor: pointer;
+}
+
+/* 会話履歴 */
+.conversation-history {
+    padding: 10px 20px;
+    border-bottom: 1px solid #333;
+}
+
+.conversation-history summary {
+    cursor: pointer;
+    font-size: 14px;
+    color: #cccccc;
+}
+
+.conversation-history ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+    max-height: 160px;
+    overflow-y: auto;
+}
+
+.conversation-history li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 500px;
+    margin-bottom: 5px;
+}
+
+.conversation-history li form:first-child {
+    flex: 1;
+    min-width: 0;
+}
+
+.conversation-history li form:last-child {
+    flex: 0 0 auto;
+}
+
+/* 会話タイトル */
+.conversation-history button {
+    width: 100%;
+    padding: 8px 12px;
+    background: #242424;
+    color: #dddddd;
+    font-size: 13px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.conversation-history button:hover {
+    background: #345449;
+}
+
+.conversation-history button.active {
+    background: #245b4b;
+    color: #ffffff;
+    border-left: 3px solid #56c9a5;
+}
+
+/* 削除ボタン */
+.conversation-history .delete-button {
+    width: auto;
+    padding: 8px 12px;
+    background: #5a3030;
+    color: #ffffff;
+}
+
+.conversation-history .delete-button:hover {
+    background: #823c3c;
+}
+
+/* チャット画面 */
+.chat-area {
+    flex: 1;
+    min-height: 0;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.message {
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    border-radius: 14px;
+    max-width: 85%;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.assistant {
+    background: #292929;
+}
+
+.user {
+    background: #245b4b;
+    margin-left: auto;
+}
+
+/* メッセージ入力 */
+.input-area {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    border-top: 1px solid #333;
+}
+
+input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid #444;
+    border-radius: 10px;
+    background: #252525;
+    color: white;
+    font-size: 15px;
+}
+
+/* 編集欄を開いたときは下の行に表示 */
+.conversation-history li {
+    flex-wrap: wrap;
+}
+
+.conversation-history .rename-chat[open] {
+    flex: 0 0 100%;
+}
+
+/* タイトル入力欄と保存ボタンを横並び */
+.conversation-history .rename-chat form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.conversation-history .rename-chat input {
+    flex: 1;
+    min-width: 0;
+    max-width: 300px;
+    padding: 8px 10px;
+    font-size: 13px;
+}
+
+.conversation-history .rename-chat button {
+    width: auto;
+    flex: 0 0 auto;
+    padding: 8px 12px;
+    background: #36977b;
+}
+
+
+/* スマートフォン向けの調整 */
+@media (max-width: 600px) {
+    header {
+        padding: 14px;
+        gap: 6px 10px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    header p {
+        font-size: 11px;
+    }
+
+    header form button {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .chat-area {
+        padding: 14px;
+    }
+
+    .message {
+        max-width: 92%;
+        padding: 12px 14px;
+    }
+
+    .input-area {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .input-area input {
+        font-size: 16px;
+    }
+}
+
+/* ログイン画面 */
+
+.login-container {
+    max-width: 400px;
+    margin: 12vh auto;
+    padding: 32px;
+    background: #1e293b;
+    border-radius: 12px;
+    color: #f1f5f9;
+}
+
+.login-container h1,
+.login-container h2 {
+    text-align: center;
+}
+
+.login-container h2 {
+    font-size: 18px;
+    margin-bottom: 28px;
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.login-container input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #475569;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    cursor: pointer;
+}
+
+/* ログアウトボタン */
+
+.logout-form button {
+    background: #374151;
+    color: #e5e7eb;
+    border: 1px solid #64748b;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.logout-form button:hover {
+    background: #4b5563;
+}
+
+/* ヘッダーのボタンを横並びにする */
+header {
+    grid-template-columns: 1fr auto auto;
+}
+
+header .logout-form {
+    grid-column: 3;
+}
+
+/* スマホでは会話タイトルと操作ボタンを2段にする */
+@media (max-width: 600px) {
+    .conversation-history li > form:first-child {
+        flex: 0 0 100%;
+    }
+}

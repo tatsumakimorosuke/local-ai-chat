@@ -1,0 +1,123 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local AI Chat</title>
+
+    <link rel="stylesheet" href="{% static 'chat/style.css' %}">
+</head>
+
+<body>
+    <div class="container">
+
+<header>
+    <h1>Local AI Chat</h1>
+    <p>Powered by Django + Ollama + Qwen3</p>
+
+    <form method="POST" action="{% url 'new_chat' %}">
+        {% csrf_token %}
+        <button type="submit">＋ 新しい会話</button>
+    </form>
+    
+<form method="POST" action="{% url 'logout' %}" class="logout-form">
+    {% csrf_token %}
+    <button type="submit">ログアウト</button>
+</form>
+
+</header>
+
+
+<details class="conversation-history">
+    <summary>会話履歴</summary>
+
+    <ul>
+        {% for conversation in conversations %}
+<li>
+    <form method="POST" action="{% url 'open_chat' conversation.id %}">
+        {% csrf_token %}
+
+<button type="submit" class="{% if conversation.id == current_conversation_id %}active{% endif %}">
+    会話 {{ conversation.id }}：{{ conversation.title }}
+</button>
+
+    </form>
+    
+    <form method="POST"
+          action="{% url 'delete_chat' conversation.id %}"
+          onsubmit="return confirm('この会話を削除しますか？削除後は元に戻せません。');">
+        {% csrf_token %}
+        <button type="submit" class="delete-button">
+            削除
+        </button>
+    </form>
+    
+<details class="rename-chat">
+    <summary>編集</summary>
+
+    <form method="POST" action="{% url 'rename_chat' conversation.id %}">
+        {% csrf_token %}
+        <input
+            type="text"
+            name="title"
+            value="{{ conversation.title }}"
+            maxlength="100"
+            required
+        >
+        <button type="submit">保存</button>
+    </form>
+</details>
+
+</li>
+        {% empty %}
+        <li>保存された会話はありません。</li>
+        {% endfor %}
+    </ul>
+</details>
+
+
+
+
+<main class="chat-area">
+
+    {% if not messages %}
+<div class="message assistant welcome-message">
+    こんにちは！何でも質問してください。
+</div>
+    {% endif %}
+
+    {% for message in messages %}
+    <div class="message {{ message.role }}">
+        {{ message.content|linebreaksbr }}
+    </div>
+    {% endfor %}
+
+    {% if error %}
+    <div class="message assistant">
+        {{ error }}
+    </div>
+    {% endif %}
+
+</main>
+
+
+
+
+<form method="POST" class="input-area">
+    {% csrf_token %}
+    <input
+        type="text"
+        name="prompt"
+        placeholder="メッセージを入力..."
+        required
+    >
+    <button type="submit">送信</button>
+</form>
+
+
+    </div>
+    <script src="{% static 'chat/app.js' %}"></script>
+</body>
+</html>
